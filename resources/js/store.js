@@ -1,9 +1,12 @@
 import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import * as Cookies from "js-cookie";
+import navigation from "./modules/navigation";
 
 const store = createStore({
-    modules: {},
+    modules: {
+        navigation,
+    },
     plugins: [
         createPersistedState({
             storage: {
