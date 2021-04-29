@@ -22,18 +22,13 @@
                         <router-view :key="$route.path"></router-view>
                     </div>
                 </div>
-                <div id="user_menu" :class="showUserMenu" class="w-full lg:w-96 h-full bg-gray-100 absolute top-0 right-0 p-4 lg:p-8 overflow-y-scroll transition duration-200 transform translate-x-full">
-                    <div>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque justo sit amet orci gravida dictum. Nulla fringilla pulvinar vulputate. Ut efficitur, metus ut interdum rutrum, justo elit iaculis diam, fermentum suscipit lorem turpis vitae nisl. Donec commodo libero in arcu ullamcorper consequat. In purus lacus, mattis ut consequat egestas, commodo at urna. Aenean ultricies tempus aliquet. Aliquam dictum vulputate cursus. Fusce porta velit eget elit ultrices, vitae pretium dui finibus. In efficitur tellus metus, eget scelerisque lorem mollis non. Morbi quis quam eu dolor malesuada pulvinar. Aenean sit amet ante mauris. Aliquam consectetur accumsan felis a auctor. Nulla rhoncus massa tortor, consectetur suscipit metus eleifend vel.
-
-                        Curabitur ac tempus libero, fringilla commodo nisi. Donec ac est eget magna euismod ultrices. Ut sollicitudin quam vel pulvinar porttitor. Mauris felis nisl, commodo vitae lacinia in, molestie nec urna. Ut et metus nec ligula ullamcorper malesuada. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut scelerisque mollis mauris, eu blandit metus ullamcorper nec. Aliquam molestie cursus ex, ac lacinia ipsum pretium in. Duis volutpat magna ac lectus auctor, et ultricies odio faucibus. Donec aliquet tristique purus ultrices varius. Suspendisse sagittis sagittis libero sed ultrices.
-
-                        Mauris convallis lacus ante, nec tincidunt ligula mattis ut. Etiam magna odio, tempor ut mi ac, sollicitudin rutrum metus. Fusce at auctor sem, et laoreet tortor. Quisque maximus hendrerit placerat. Duis iaculis rutrum mauris, eu suscipit turpis sagittis at. Aenean eu orci at turpis congue placerat. Integer ultrices massa a tempus pharetra. Nam faucibus odio sapien, quis efficitur quam accumsan a. Vivamus et magna viverra, placerat lacus ac, vestibulum risus. Nunc arcu purus, fringilla at pellentesque non, facilisis id turpis. Cras laoreet accumsan ante, in euismod orci faucibus ut. Ut sed sodales magna, eget euismod purus. Sed nec molestie odio, eget pellentesque augue. Nam eget viverra est.
-
-                        Duis varius dolor felis, at consectetur felis iaculis finibus. Suspendisse interdum gravida leo, ut ornare lorem congue at. Phasellus aliquam consequat varius. Phasellus eu dignissim enim. Vestibulum nec bibendum nunc, vel porta magna. Cras tincidunt lacus sed iaculis dictum. Maecenas sagittis dui nec justo fringilla, at posuere velit semper. Aliquam erat volutpat. Mauris id vehicula libero.
-
-                        Proin egestas, erat non posuere semper, nisi massa mollis tellus, id luctus risus tellus eu magna. Pellentesque elementum iaculis sapien ac rutrum. Pellentesque varius augue non accumsan laoreet. Morbi sit amet scelerisque ex, eu viverra ipsum. Nullam nec lorem at augue tincidunt interdum vulputate vestibulum quam. Aliquam et facilisis enim. Donec egestas ipsum convallis iaculis maximus. Aenean auctor arcu eros, in gravida justo tempus id.
-                    </div>
+                <div id="user_menu" :class="showUserMenu" class="w-full lg:w-96 h-full bg-gray-50 absolute top-0 right-0 p-4 lg:p-8 overflow-y-scroll transition duration-200 transform translate-x-full">
+                    <component
+                        @login="user_menu.component = 'login'"
+                        @create-account="user_menu.component = 'registration'"
+                        @forgot-password="user_menu.component = 'recovery'"
+                        :is="user_menu.component">
+                    </component>
                 </div>
             </div>
         </div>
@@ -42,6 +37,9 @@
 
 <script>
     import NavbarItem from "./components/nav/NavbarItem";
+    import Login from "./components/auth/Login";
+    import Registration from "./components/auth/Registration";
+    import Recovery from "./components/auth/Recovery";
 
     export default {
         name: "App",
@@ -49,11 +47,15 @@
             return {
                 user_menu: {
                     show: false,
+                    component: 'login',
                 },
             }
         },
         components: {
             NavbarItem,
+            Login,
+            Registration,
+            Recovery,
         },
         methods: {
             redirect(path) {
