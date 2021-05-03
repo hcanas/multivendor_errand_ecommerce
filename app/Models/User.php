@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -39,5 +40,21 @@ class User extends Authenticatable
     public function getRolesAttribute($value)
     {
         return explode(',', $value);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+    protected static function boot()
+    {
+        static::creating(function ($model) {
+            $model->attributes['email_verified_at'] = now();
+            $model->attributes['roles'] = 'buyer';
+            $model->attributes['status'] = 'active';
+        });
+
+        parent::boot();
     }
 }

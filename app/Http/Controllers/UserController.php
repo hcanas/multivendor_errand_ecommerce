@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\VerificationCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -22,18 +21,12 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
 
-            $data = $request->validated();
-            $data['password'] = Hash::make($data['password']);
-            $data['email_verified_at'] = now();
-            $data['roles'] = ['buyer'];
-            $data['status'] = 'active';
-
             VerificationCode::query()
-                ->where('email', $data['email'])
-                ->where('code', $data['code'])
+                ->where('email', $request->validated()['email'])
+                ->where('code', $request->validated()['code'])
                 ->update(['status' => 'used']);
 
-            $user = User::create($data);
+            $user = User::create($request->validated());
 
             DB::commit();
 
