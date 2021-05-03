@@ -13,14 +13,7 @@ class VerificationCodeController extends Controller
         try {
             DB::beginTransaction();
 
-            $code = [
-                'code' => bin2hex(random_bytes(4)),
-                'email' => $request->validated()['email'],
-                'expires_at' => now()->addMinutes(15),
-                'status' => 'unused',
-            ];
-
-            VerificationCode::create($code);
+            VerificationCode::create($request->validated());
 
             DB::commit();
 

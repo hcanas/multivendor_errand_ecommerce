@@ -29,6 +29,5 @@ class AppServiceProvider extends ServiceProvider
     {
         JsonResource::withoutWrapping();
 
-        VerificationCode::observe(VerificationCodeObserver::class);
     }
 }
