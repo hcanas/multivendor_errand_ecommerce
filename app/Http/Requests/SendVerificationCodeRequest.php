@@ -12,8 +12,12 @@ class SendVerificationCodeRequest extends BaseRequest
     {
         $rules = $this->getUserRules(['email']);
 
-        if ($this->segment(count($this->segments())) === 'email') {
-            $rules['email'][] = 'unique:users';
+        switch ($this->segment(count($this->segments()))) {
+            case 'email':
+                $rules['email'][] = 'unique:users';
+                break;
+            case 'password':
+                $rules['email'][] = 'exists:users';
         }
 
         return $rules;
