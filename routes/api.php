@@ -6,3 +6,6 @@ Route::post('verification_code/{type}', [\App\Http\Controllers\VerificationCodeC
     ->where('type', '(email|password)');
 
 Route::post('users', [\App\Http\Controllers\UserController::class, 'store']);
+
+Route::apiResource('password_reset', \App\Http\Controllers\PasswordResetController::class)
+    ->only('store');
