@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CreatedVerificationCode;
 use App\Http\Requests\SendVerificationCodeRequest;
 use App\Models\VerificationCode;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,8 @@ class VerificationCodeController extends Controller
         try {
             DB::beginTransaction();
 
-            VerificationCode::create($request->validated());
+            $verification_code = VerificationCode::create($request->validated());
+            event(new CreatedVerificationCode($verification_code));
 
             DB::commit();
 

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Mail;
 
 class VerificationCode extends Model
 {
@@ -31,10 +30,6 @@ class VerificationCode extends Model
             $model->attributes['code'] = bin2hex(random_bytes(4));
             $model->attributes['expires_at'] = now()->addMinutes(15);
             $model->attributes['status'] = 'unused';
-        });
-
-        static::created(function ($model) {
-            Mail::to($model->email)->queue(new \App\Mail\VerificationCode($model));
         });
 
         parent::boot();
