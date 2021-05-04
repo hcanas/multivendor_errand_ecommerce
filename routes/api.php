@@ -9,3 +9,6 @@ Route::post('users', [\App\Http\Controllers\UserController::class, 'store']);
 
 Route::apiResource('password_reset', \App\Http\Controllers\PasswordResetController::class)
     ->only('store');
+
+Route::apiResource('tokens', \App\Http\Controllers\AuthTokenController::class)
+    ->only('store');
