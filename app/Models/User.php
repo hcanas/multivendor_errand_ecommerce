@@ -47,6 +47,11 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
+    public function activities()
+    {
+        return $this->hasMany(UserActivity::class);
+    }
+
     protected static function boot()
     {
         static::creating(function ($model) {

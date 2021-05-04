@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GenericUserActivity;
 use App\Http\Requests\CreateAuthTokenRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,7 @@ class AuthTokenController extends Controller
             }
 
             $token = $user->createToken($user->email)->plainTextToken;
+            event(new GenericUserActivity('Logged in.', $user->id));
 
             DB::commit();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GenericUserActivity;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,8 @@ class PasswordResetController extends Controller
 
             $user->fill(['password' => $request->validated()['password']])
                 ->save();
+
+            event(new GenericUserActivity('Updated password.', $user->id));
 
             DB::commit();
 
