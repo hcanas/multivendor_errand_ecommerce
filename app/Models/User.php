@@ -55,9 +55,9 @@ class User extends Authenticatable
     protected static function boot()
     {
         static::creating(function ($model) {
-            $model->attributes['email_verified_at'] = now();
-            $model->attributes['roles'] = 'buyer';
-            $model->attributes['status'] = 'active';
+            $model->attributes['email_verified_at'] = $model->attributes['email_verified_at'] ?? now();
+            $model->attributes['roles'] = $model->attributes['roles'] ?? 'buyer';
+            $model->attributes['status'] = $model->attributes['status'] ?? 'active';
         });
 
         parent::boot();
