@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Events\GenericUserActivity;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class PasswordResetController extends Controller
 {

@@ -7,8 +7,7 @@ Route::post('verification_code/{type}', [\App\Http\Controllers\VerificationCodeC
 
 Route::post('users', [\App\Http\Controllers\UserController::class, 'store']);
 
-Route::apiResource('password_reset', \App\Http\Controllers\PasswordResetController::class)
-    ->only('store');
-
-Route::apiResource('tokens', \App\Http\Controllers\AuthTokenController::class)
-    ->only('store');
+Route::prefix('auth')->group(function () {
+    Route::post('password_reset', [\App\Http\Controllers\Auth\PasswordResetController::class, 'store']);
+    Route::post('tokens', [\App\Http\Controllers\Auth\TokenController::class, 'store']);
+});

@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Events\GenericUserActivity;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAuthTokenRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class AuthTokenController extends Controller
+class TokenController extends Controller
 {
     public function store(CreateAuthTokenRequest $request)
     {
