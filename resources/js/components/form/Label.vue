@@ -1,5 +1,5 @@
 <template>
-    <label class="text-gray-700 lg:text-sm font-medium uppercase">
+    <label class="lg:text-sm font-medium uppercase">
         <slot></slot>
     </label>
 </template>

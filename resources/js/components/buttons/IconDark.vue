@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="text-gray-700 font-medium p-1.5 rounded hover:text-gray-500 focus:outline-none focus:text-gray-500">
+    <button type="button" class="font-medium p-1.5 rounded hover:text-gray-500 focus:outline-none focus:text-gray-500">
         <i :class="icon"></i>
     </button>
 </template>

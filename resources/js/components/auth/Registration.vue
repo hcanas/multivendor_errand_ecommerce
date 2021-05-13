@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col">
-        <p class="text-gray-700 text-center text-xl font-bold mb-4">CREATE ACCOUNT</p>
+        <p class="text-center text-xl font-bold mb-4">CREATE ACCOUNT</p>
 
         <component v-show="alert.show" :is="`alert-${alert.type}`">{{alert.message}}</component>
 

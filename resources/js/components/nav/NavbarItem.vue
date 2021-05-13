@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="to" :class="`${active} text-gray-700 font-bold hover:text-red-700 focus:text-red-700 focus:outline-none transition duration-200`">
+    <router-link :to="to" :class="`${active} font-bold hover:text-red-700 focus:text-red-700 focus:outline-none transition duration-200`">
         <div class="flex flex-col items-center space-x-1 rounded-l py-2 relative">
             <i :class="`${icon} text-xl w-6 lg:w-11 text-center`"></i>
             <span class="hidden lg:inline text-xs">{{label}}</span>
