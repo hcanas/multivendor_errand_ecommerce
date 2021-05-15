@@ -139,7 +139,7 @@
                 this.clearErrors();
                 this.save_password.status = 'processing';
 
-                axios.post('/api/password_reset', this.form_data)
+                axios.post('/api/auth/password_reset', this.form_data)
                     .then(response => {
                         this.alert.show = true;
                         this.alert.type = 'success';
