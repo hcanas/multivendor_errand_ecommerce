@@ -14,6 +14,7 @@ module.exports = {
           gray: colors.trueGray,
           red: colors.red,
           green: colors.green,
+          amber: colors.amber,
       },
       screens: {
           'sm': '576px',
