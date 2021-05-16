@@ -13,9 +13,11 @@
         "@vue/compiler-sfc": "^3.0.11",
         "autoprefixer": "^10.2.5",
         "axios": "^0.21",
+        "laravel-echo": "^1.10.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.2.10",
+        "pusher-js": "^7.0.3",
         "tailwindcss": "^2.1.1",
         "vuex": "^4.0.0",
         "vuex-persistedstate": "^4.0.0-beta.3"
