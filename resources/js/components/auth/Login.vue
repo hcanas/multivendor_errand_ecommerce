@@ -31,7 +31,7 @@
             </div>
 
             <div class="flex flex-col my-4">
-                <button-primary @click="signIn()">
+                <button-primary type="submit" @click.prevent="signIn()">
                     <span v-if="sign_in.status === 'standby'">Sign In</span>
                     <span v-else-if="sign_in.status === 'processing'" class="flex justify-center items-center space-x-1">
                         <i class="animate-spin fas fa-circle-notch"></i>
