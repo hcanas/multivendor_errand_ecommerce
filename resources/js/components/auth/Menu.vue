@@ -9,7 +9,7 @@
         </p>
 
         <div class="flex flex-col mt-4">
-            <sidebar-menu-item :to="``" @click.prevent="redirect(`/user/${authUser.id}/activity_log`)" :icon="`fas fa-portrait`" :label="`Profile`" :is_active="activeUserPage === 'profile'"></sidebar-menu-item>
+            <sidebar-menu-item :to="``" @click.prevent="redirect(`/user/${authUser.id}/activity_log?page=1&per_page=15`)" :icon="`fas fa-portrait`" :label="`Profile`" :is_active="activeUserPage === 'profile'"></sidebar-menu-item>
             <sidebar-menu-item :to="``" @click.prevent="redirect(`/tickets`)" :icon="`fas fa-ticket-alt`" :label="`Tickets`" :is_active="activeUserPage === 'tickets'"></sidebar-menu-item>
             <sidebar-menu-item :to="``" @click.prevent="redirect(`/messages`)" :icon="`fas fa-comments`" :label="`Messages`" :is_active="activeUserPage === 'messages'"></sidebar-menu-item>
             <sidebar-menu-item :to="``" @click.prevent="redirect(`/notifications`)" :icon="`fas fa-bell`" :label="`Notifications`" :is_active="activeUserPage === 'notifications'"></sidebar-menu-item>

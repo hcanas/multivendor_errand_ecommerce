@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\VerificationCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -40,7 +41,17 @@ class UserController extends Controller
 
     public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user) {
+            if (Gate::allows('view', $user)) {
+                return new UserResource($user);
+            } else {
+                return response()->json(config('constants.error_messages.forbidden', 403));
+            }
+        } else {
+            return response()->json('User not found.', 404);
+        }
     }
 
     public function update(Request $request, $id)
