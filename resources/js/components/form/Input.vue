@@ -1,5 +1,5 @@
 <template>
-    <input class="p-1.5 border focus:ring-1 focus:ring-red-600 focus:outline-none rounded">
+    <input class="p-1 border focus:ring-1 focus:ring-red-600 focus:outline-none rounded">
 </template>
 
 <script>
