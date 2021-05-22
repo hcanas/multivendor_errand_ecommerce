@@ -1,27 +1,28 @@
 <template>
     <div class="w-full h-full">
         <div class="w-full h-full flex flex-col">
-            <div class="flex-shrink-0 lg:w-1/3 order-1 bg-gray-50 h-20 lg:h-24">
+            <div class="flex-shrink-0 lg:w-1/3 order-1 bg-gray-100 h-20 lg:h-24">
                 <router-link to="/" :class="`focus:outline-none`">
                     <img src="/images/logo.png" alt="brand logo" class="h-16 mx-auto lg:ml-8 my-2 lg:my-4">
                 </router-link>
             </div>
-            <div class="flex-shrink-0 order-3 lg:order-2 lg:w-2/3 lg:absolute lg:top-0 lg:right-0 bg-gray-50 h-14 lg:h-24">
+            <div class="flex-shrink-0 order-3 lg:order-2 lg:w-2/3 lg:absolute lg:top-0 lg:right-0 bg-gray-100 h-14 lg:h-24">
                 <div class="w-full h-full flex justify-evenly lg:justify-end items-center lg:space-x-8 lg:pr-8">
+                    <!-- TODO: move navbar items into a navbar component -->
                     <navbar-item :to="``" :icon="`fas fa-home`" :label="`HOME`" :is_active="activePage === 'home'" @click="redirect('/')"></navbar-item>
                     <navbar-item :to="``" :icon="`fas fa-shopping-basket`" :label="`SHOP`" :is_active="activePage === 'shop'" @click="redirect('shop')"></navbar-item>
                     <navbar-item :to="``" :icon="`fas fa-store`" :label="`STORES`" :is_active="activePage === 'stores'" @click="redirect('stores')"></navbar-item>
                     <navbar-item :to="``" :icon="`fas fa-shopping-cart`" :label="`CART`" :is_active="activePage === 'cart'" :new_content="false" @click="redirect('cart')"></navbar-item>
-                    <navbar-item v-if="user_menu.show" :to="``" :icon="`fas fa-times`" :label="`CLOSE`" :is_active="false" :new_content="false" @click="user_menu.show = false"></navbar-item>
-                    <navbar-item v-if="user_menu.show === false && authToken === null" :to="``" :icon="`fas fa-sign-in-alt`" :label="`LOGIN`" :is_active="false" :new_content="false" @click="user_menu.show = true"></navbar-item>
-                    <navbar-item v-if="user_menu.show === false && authToken" :to="``" :icon="`fas fa-user`" :label="`USER`" :is_active="false" :new_content="false" @click="user_menu.show = true"></navbar-item>
+                    <navbar-item v-if="user_menu.show" :is_static="true" :icon="`fas fa-times`" :label="`CLOSE`" :is_active="false" :new_content="false" @click="user_menu.show = false"></navbar-item>
+                    <navbar-item v-if="user_menu.show === false && authToken === null" :is_static="true" :icon="`fas fa-sign-in-alt`" :label="`LOGIN`" :is_active="false" :new_content="false" @click="user_menu.show = true"></navbar-item>
+                    <navbar-item v-if="user_menu.show === false && authToken" :is_static="true" :icon="`fas fa-user`" :label="`USER`" :is_active="false" :new_content="false" @click="user_menu.show = true"></navbar-item>
                 </div>
             </div>
             <div class="flex-grow order-2 lg:order-3 bg-white overflow-hidden relative">
                 <div id="content" :class="{ 'pull-left': user_menu.show }" class="w-full h-full p-4 lg:p-8 overflow-y-scroll transition transform">
                     <router-view :key="$route.path"></router-view>
                 </div>
-                <div id="user_menu" :class="{ show: user_menu.show }" class="w-full lg:w-80 h-full bg-gray-50 absolute top-0 right-0 p-4 lg:p-8 overflow-y-scroll transition transform translate-x-full">
+                <div id="user_menu" :class="{ show: user_menu.show }" class="w-full lg:w-96 h-full bg-gray-100 absolute top-0 right-0 p-4 lg:p-8 overflow-y-scroll transition transform translate-x-full">
                     <component
                         @login="user_menu.component = 'login'"
                         @logged-in="fetchAuthUser()"
@@ -85,6 +86,7 @@
                 }
 
                 this.user_menu.component = 'login';
+                this.$router.push('/');
             },
             fetchAuthUser() {
                 axios.get('/api/auth/user', {
@@ -93,7 +95,7 @@
                         },
                     })
                     .then(response => {
-                        this.$store.dispatch('auth/setUser', response.data);
+                        this.$store.dispatch('auth/setUser', response.data.data);
                         this.user_menu.component = 'user-menu';
                         this.checkUserUpdates();
                     })
@@ -127,7 +129,7 @@
                         },
                     })
                     .then(response => {
-                        this.$store.dispatch('auth/setNotifications', response.data);
+                        this.$store.dispatch('auth/setNotifications', response.data.data);
                     })
                     .catch(error => {});
 
@@ -169,6 +171,6 @@
     }
 
     #content.pull-left {
-        @apply -translate-x-80
+        @apply -translate-x-96
     }
 </style>
