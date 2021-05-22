@@ -17,25 +17,25 @@ const navigation = {
         },
     },
     mutations: {
-        setActivePage(state, payload) {
-            state.active_page = payload.value;
+        setActivePage(state, page) {
+            state.active_page = page;
         },
-        setActiveUserPage(state, payload) {
-            state.active_user_page = payload.value;
+        setActiveUserPage(state, page) {
+            state.active_user_page = page;
         },
-        setActiveProfilePage(state, payload) {
-            state.active_profile_page = payload.value;
+        setActiveProfilePage(state, page) {
+            state.active_profile_page = page;
         },
     },
     actions: {
-        setActivePage({ commit }, payload) {
-            commit('setActivePage', payload);
+        setActivePage({ commit }, page) {
+            commit('setActivePage', page);
         },
-        setActiveUserPage({ commit }, payload) {
-            commit('setActiveUserPage', payload);
+        setActiveUserPage({ commit }, page) {
+            commit('setActiveUserPage', page);
         },
-        setActiveProfilePage({ commit }, payload) {
-            commit('setActiveProfilePage', payload);
+        setActiveProfilePage({ commit }, page) {
+            commit('setActiveProfilePage', page);
         },
     },
 };
